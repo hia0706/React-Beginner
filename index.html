@@ -1,37 +1,41 @@
 <!DOCTYPE html>
 <html>
-    <body>
-        <div id="root"></div>
-    </body>
-    <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
-    <script>
-        let clickCount = 0;
-        let mouseCount = 0;
-        const root = document.getElementById("root");
+<body>
+<div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    let clickCount = 0;
+    const root = document.getElementById("root");
 
-        function render() {
-            const totalMouse = React.createElement("span", null, "totalMouse " + mouseCount);
-            const h3 = React.createElement("h3", {
-                id: "title",
-                onMouseEnter: () => {
-                    mouseCount += 1;
-                    render();
-                    console.log("mouse enter");
-                }
-            }, "Hello, I'm a span");
-            const totalClick = React.createElement("span", null, "total click " + clickCount);
-            const btn = React.createElement("button", {
-                style: {background: "red"},
-                onClick: () => {
+    function render() {
+        const Title =
+            <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
+                Hello, I'm a Title
+            </h3>
+        const totalClick =
+            <span>
+                total click {clickCount}
+            </span>
+        //React.createElement("span", null, "total click " + clickCount);
+        const Button = (
+            <button
+                style={{
+                    backgroundColor: "tomato",
+                }}
+                onClick={() => {
                     clickCount += 1;
-                    render();
                     console.log("I'm Clicked");
-                }
-            }, "Click");
-            const container = React.createElement("div", null, [totalMouse, " ", h3, totalClick, " ", btn]);
-            ReactDOM.render(container, root);
-        }
-        render();
-    </script>
+                    render();
+                }}>
+                Click
+            </button>
+        );
+        const container = React.createElement("div", null, [Title, totalClick, " ", Button]);
+        ReactDOM.render(container, root);
+    }
+    render();
+</script>
 </html>
