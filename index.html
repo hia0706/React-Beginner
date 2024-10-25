@@ -7,35 +7,32 @@
 <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script type="text/babel">
-    let clickCount = 0;
+    let count = 0;
     const root = document.getElementById("root");
 
-    function render() {
-        const Title =
-            <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
-                Hello, I'm a Title
-            </h3>
-        const totalClick =
-            <span>
-                total click {clickCount}
-            </span>
-        //React.createElement("span", null, "total click " + clickCount);
-        const Button = (
-            <button
-                style={{
-                    backgroundColor: "tomato",
-                }}
-                onClick={() => {
-                    clickCount += 1;
-                    console.log("I'm Clicked");
-                    render();
-                }}>
-                Click
-            </button>
-        );
-        const container = React.createElement("div", null, [Title, totalClick, " ", Button]);
-        ReactDOM.render(container, root);
-    }
-    render();
+    const Title = () => (
+        <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
+            Hello, I'm a Title
+        </h3>
+    )
+    const Button = () => (
+        <button
+            style={{
+                backgroundColor: "tomato",
+            }}
+            onClick={() => {
+                count += 1;
+                console.log("I'm Clicked");
+            }}>
+            Click
+        </button>
+    );
+    const Container = () => (
+        <div>
+            <Title/>
+            <Button/>
+        </div>
+    )
+    ReactDOM.render(<Container />, root);
 </script>
 </html>
