@@ -6,13 +6,32 @@
     <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
     <script>
-        //import React from "react";
-        let count = 0;
+        let clickCount = 0;
+        let mouseCount = 0;
         const root = document.getElementById("root");
-        const span = React.createElement(
-            "span",
-            { id: "span", style: { color: "red" } },
-            "I'm span");
-        ReactDOM.render(span, root);
+
+        function render() {
+            const totalMouse = React.createElement("span", null, "totalMouse " + mouseCount);
+            const h3 = React.createElement("h3", {
+                id: "title",
+                onMouseEnter: () => {
+                    mouseCount += 1;
+                    render();
+                    console.log("mouse enter");
+                }
+            }, "Hello, I'm a span");
+            const totalClick = React.createElement("span", null, "total click " + clickCount);
+            const btn = React.createElement("button", {
+                style: {background: "red"},
+                onClick: () => {
+                    clickCount += 1;
+                    render();
+                    console.log("I'm Clicked");
+                }
+            }, "Click");
+            const container = React.createElement("div", null, [totalMouse, " ", h3, totalClick, " ", btn]);
+            ReactDOM.render(container, root);
+        }
+        render();
     </script>
 </html>
