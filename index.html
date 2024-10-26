@@ -9,10 +9,11 @@
 <script type="text/babel">
     const root = document.getElementById("root");
     function App () {
-        const [count, modifier] = React.useState(0); // 초기 값 = 0
         // 뒤의 값은 일반적으로 set + 앞의 이름을 사용
+        // const [count, modifier] = React.useState(0);
+        const [count, setCount] = React.useState(0);
         const onClick = () => {
-            modifier(count + 1);
+            setCount(count + 1);
         }
         return (
             <div>
