@@ -1,58 +1,102 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <meta charset="UTF-8">
+</head>
 <body>
 <div id="root"></div>
 </body>
 <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
 <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<link rel="stylesheet" href="style.css">
 <script type="text/babel">
     function MinutesToHours() {
-        const [amount, setAmount] = React.useState("");
-        const [inverted, setInverted] = React.useState(false);
+        const [amount, setAmount] = React.useState(0);
+        const [isMinToHour, setisMinToHour] = React.useState(false);
         const onChange = (e) => setAmount(e.target.value);
-        const reset = () => setAmount("");
+        const resetAmount = () => setAmount(0);
         const onInvert = () => {
-            reset();
-            setInverted((current) => !current);
+            resetAmount();
+            setisMinToHour((current) => !current);
         }
         return (
             <div>
+                <span>정확한 길이가 아닙니다. 근삿값이므로 참고해주세요.</span>
                 <div>
                     <label htmlFor="minutes">Minutes</label>
                     <input
-                        value={!inverted ? amount : amount * 60}
+                        value={isMinToHour ? amount * 60 : amount}
                         id="minutes"
                         placeholder="Minutes"
                         type="number"
                         onChange={onChange}
-                        disabled={inverted}
+                        disabled={isMinToHour}
                     />
                 </div>
                 <div>
                     <label htmlFor="hours">Hours</label>
                     <input
-                        value={inverted ? amount : Math.round(amount / 60)}
+                        value={isMinToHour ? amount : Math.round(amount / 60)}
                         id="hours"
                         placeholder="Hours"
                         type="number"
                         onChange={onChange}
-                        disabled={!inverted}
+                        disabled={!isMinToHour}
                     />
-                    <div>
-                        <button onClick={reset}>Reset</button>
-                        <button onClick={onInvert}>
-                            {inverted ? "Turn back" : "inverted"}
-                        </button>
-                    </div>
+                </div>
+                <div>
+                    <button onClick={resetAmount}>Reset</button>
+                    <button onClick={onInvert}>
+                        {isMinToHour ? "Switch to Minutes" : "Switch to Hours"}
+                    </button>
                 </div>
             </div>
         );
     }
 
     function KmToMiles() {
-        return <h3>Km to Miles</h3>
-        // todo km to miles 변환기 만들기
+        const [length, setLength] = React.useState(0);
+        const [isKmToMiles, setisKmToMiles] = React.useState(false);
+        const onChange = (e) => setLength(e.target.value);
+        const resetLength = () => setLength(0);
+        const onInvert = () => {
+            resetLength();
+            setisKmToMiles((current) => !current);
+        }
+        return (
+            <div>
+                <span>정확한 길이가 아닙니다. 근삿값이므로 참고해주세요.</span>
+                <div>
+                    <label htmlFor="km">Km</label>
+                    <input
+                        value={isKmToMiles ? (length * 1.609).toFixed(3) : length}
+                        id="km"
+                        placeholder="Km"
+                        type="number"
+                        onChange={onChange}
+                        disabled={isKmToMiles}
+                    />
+                </div>
+                <label htmlFor="miles">Miles</label>
+                <div>
+                    <input
+                        value={isKmToMiles ? length : (length / 1.609).toFixed(3)}
+                        id="miles"
+                        placeholder="Miles"
+                        type="number"
+                        onChange={onChange}
+                        disabled={!isKmToMiles}
+                    />
+                </div>
+                <div>
+                    <button onClick={resetLength}>Reset</button>
+                    <button onClick={onInvert}>
+                        {isKmToMiles ? "Switch to Km" : "Switch to Miles"}
+                    </button>
+                </div>
+            </div>
+        );
     }
 
     function App() {
@@ -62,14 +106,14 @@
         }
         return (
             <div>
-                <h1>Super Converter</h1>
+                <h1>Two Converters</h1>
                 <select value={index} onChange={onSelect}>
                     <option value="-1">Choose Select Options</option>
                     <option value="0">Minutes & Hours Converter</option>
                     <option value="1">Km & Miles Converter</option>
                 </select>
                 <hr/>
-                {index === "-1" ? "Please Select Options" : null}
+                {index === "-1" ? "옵션에서 선택해주세요." : null}
                 {index === "0" ? <MinutesToHours/> : null}
                 {index === "1" ? <KmToMiles/> : null}
             </div>
