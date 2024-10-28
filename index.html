@@ -3,26 +3,43 @@
 <body>
 <div id="root"></div>
 </body>
-<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
-<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script type="text/babel">
-    const root = document.getElementById("root");
     function App () {
-        // 뒤의 값은 일반적으로 set + 앞의 이름을 사용
-        // const [count, modifier] = React.useState(0);
-        const [count, setCount] = React.useState(0);
-        const onClick = () => {
-            //setCount(count + 1);
-            setCount((current) => current + 1);
+        const [minutes, setMinutes] = React.useState();
+        const onChange = (event) => {
+            setMinutes(event.target.value);
         };
         return (
             <div>
-                <h3>Total Clicks: {count}</h3>
-                <button onClick={onClick}>Click</button>
+                <h1 className="sc">Super Converter</h1>
+                <div>
+                    <label htmlFor="minutes">Minutes</label>
+                    <input
+                        value={minutes}
+                        id="minutes"
+                        placeholder="Minutes"
+                        onChange={onChange}
+                    // onChange={e => setMinutes(e.target.value)} react doc 에서 사용하는 방법
+                        type="number"
+                    />
+                </div>
+                <div>
+                    <label htmlFor="hours">Hours</label>
+                    <input
+                        value={minutes}
+                        id="hours"
+                        placeholder="Hours"
+                        type="number"
+                    />
+                </div>
             </div>
-        )
+        );
     }
+
+    const root = document.getElementById("root");
     ReactDOM.render(<App/>, root);
 </script>
 </html>
