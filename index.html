@@ -8,48 +8,48 @@
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script type="text/babel">
     function App () {
-        const [amount, setAmount] = React.useState(0);
-        const [flipped, setFlipped] = React.useState(false);
-        const onChange = (event) => { setAmount(Number(event.target.value)) };
-        const reset = () => setAmount(0);
-        const onFlip = () => {
+        const [amount, setAmount] = React.useState("");
+        const [inverted, setInverted] = React.useState(false);
+        const onChange = (e) => setAmount(e.target.value);
+        const reset = () => setAmount("");
+        const onInvert = () => {
             reset();
-            setFlipped((current) => !current);
-        };
+            setInverted((current) => !current);
+        }
         return (
             <div>
                 <h1 className="sc">Super Converter</h1>
                 <div>
                     <label htmlFor="minutes">Minutes</label>
                     <input
-                        value={!flipped ? amount : amount * 60}
+                        value={!inverted ? amount : amount * 60}
                         id="minutes"
                         placeholder="Minutes"
                         type="number"
                         onChange={onChange}
-                    // onChange={e => setMinutes(e.target.value)} react doc 에서 사용하는 방법
-                        disabled={flipped}
+                        disabled={inverted}
                     />
                 </div>
                 <div>
                     <label htmlFor="hours">Hours</label>
                     <input
-                        value={flipped ? amount : Math.round(amount / 60)}
+                        value={inverted ? amount : Math.round(amount / 60)}
                         id="hours"
                         placeholder="Hours"
                         type="number"
                         onChange={onChange}
-                        disabled={!flipped}
+                        disabled={!inverted}
                     />
                     <div>
-                        <button onClick={onFlip}>Flip</button>
                         <button onClick={reset}>Reset</button>
+                        <button onClick={onInvert}>
+                            {inverted ? "Turn back" : "inverted"}
+                        </button>
                     </div>
                 </div>
             </div>
         );
     }
-
     const root = document.getElementById("root");
     ReactDOM.render(<App/>, root);
 </script>
