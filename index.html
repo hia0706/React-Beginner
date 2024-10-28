@@ -8,9 +8,13 @@
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script type="text/babel">
     function App () {
-        const [minutes, setMinutes] = React.useState(0);
-        const onChange = (event) => {
-            setMinutes(event.target.value);
+        const [amount, setAmount] = React.useState(0);
+        const [flipped, setFlipped] = React.useState(false);
+        const onChange = (event) => { setAmount(Number(event.target.value)) };
+        const reset = () => setAmount(0);
+        const onFlip = () => {
+            reset();
+            setFlipped((current) => !current);
         };
         return (
             <div>
@@ -18,25 +22,28 @@
                 <div>
                     <label htmlFor="minutes">Minutes</label>
                     <input
-                        value={minutes}
+                        value={!flipped ? amount : amount * 60}
                         id="minutes"
                         placeholder="Minutes"
+                        type="number"
                         onChange={onChange}
                     // onChange={e => setMinutes(e.target.value)} react doc 에서 사용하는 방법
-                        type="number"
+                        disabled={flipped}
                     />
                 </div>
                 <div>
                     <label htmlFor="hours">Hours</label>
                     <input
-                        value={Math.round(minutes / 60)}
+                        value={flipped ? amount : Math.round(amount / 60)}
                         id="hours"
                         placeholder="Hours"
                         type="number"
-                        disabled
+                        onChange={onChange}
+                        disabled={!flipped}
                     />
                     <div>
-                        <button onClick={() => setMinutes(0)}>Reset</button>
+                        <button onClick={onFlip}>Flip</button>
+                        <button onClick={reset}>Reset</button>
                     </div>
                 </div>
             </div>
