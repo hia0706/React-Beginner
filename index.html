@@ -106,7 +106,11 @@
         }
         return (
             <div>
-                <h1>Two Converters</h1>
+                <h1>
+                    {index === "-1" ? "Two Converters" : ""}
+                    {index === "0" ? "Minutes & Hours Convert" : ""}
+                    {index === "1" ? "Km & Miles Convert" : ""}
+                </h1>
                 <select value={index} onChange={onSelect}>
                     <option value="-1">Choose Select Options</option>
                     <option value="0">Minutes & Hours Converter</option>
