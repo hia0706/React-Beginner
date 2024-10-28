@@ -1,85 +1,101 @@
-/* style.css */
-
+/* 기본 스타일 */
 body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    font-family: Arial, sans-serif;
+    height: 100vh;
     margin: 0;
-    background-color: #f4f4f9;
 }
 
-#root {
-    width: 100%;
-    max-width: 400px;
+/* 전체 컨테이너 스타일 */
+#root > div {
     background-color: #fff;
-    padding: 2rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    max-width: 400px;
+    width: 100%;
     text-align: center;
 }
 
+/* 제목 스타일 */
 h1 {
-    color: #333;
     font-size: 24px;
-    margin-bottom: 1.5rem;
+    color: #333;
+    margin-bottom: 20px;
 }
 
+/* 드롭다운 스타일 */
 select {
-    padding: 0.5rem;
+    padding: 10px;
     font-size: 16px;
-    margin-bottom: 1rem;
-    width: 100%;
-    border: 1px solid #ddd;
     border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 100%;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    background-color: #fafafa;
+    cursor: pointer;
 }
 
-hr {
-    margin: 1rem 0;
-    border: 0;
-    height: 1px;
-    background-color: #ddd;
-}
-
-label {
-    font-size: 16px;
-    color: #555;
+/* 설명 텍스트 스타일 */
+span {
     display: block;
-    margin-bottom: 0.5rem;
+    font-size: 14px;
+    color: #777;
+    margin: 10px 0 20px;
+}
+
+/* 라벨 스타일 */
+label {
+    display: block;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
     text-align: left;
 }
 
+/* 인풋 필드 스타일 */
 input[type="number"] {
-    width: calc(100% - 1rem);
-    padding: 0.5rem;
+    padding: 10px;
     font-size: 16px;
-    border: 1px solid #ddd;
+    width: 100%;
+    margin-bottom: 15px;
+    box-sizing: border-box;
     border-radius: 5px;
-    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    background-color: #fafafa;
 }
 
+/* 버튼 스타일 */
 button {
-    padding: 0.5rem 1rem;
-    font-size: 16px;
-    margin: 0.5rem;
+    padding: 10px 15px;
+    font-size: 14px;
+    margin: 5px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    color: #fff;
-    background-color: #007bff;
-    transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #0056b3;
+    opacity: 0.9;
 }
 
-button:active {
-    transform: scale(0.98);
+button:nth-of-type(1) {
+    background-color: #ff6363;
+    color: #fff;
 }
 
-button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+button:nth-of-type(2) {
+    background-color: #4caf50;
+    color: #fff;
+}
+
+/* 구분선 스타일 */
+hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 20px 0;
 }
