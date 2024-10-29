@@ -9,33 +9,40 @@
 </body>
 <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
 <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script type="text/babel">
-	function Btn({ text, onClick }) {
-		console.log(text, "render")
+	function Btn({ text, fontSize = 16 }) {
 		return (
 			<button
-				onClick={onClick}
 				style={{
 				backgroundColor: "tomato",
 				padding: "10px 20px",
 				color: "white",
 				border: 0,
 				borderRadius: 10,
+					fontSize,
 			}}>
 				{text}
 			</button>
 		);
 	}
-
-	const MemorizedBtn = React.memo(Btn);
+	Btn.propTypes = {
+		// 다른 type 검사방법은 prop 이름과 그 type을 쓰면 된다.
+		// prop의 필수 설정 .isRequired
+		text: PropTypes.string.isRequired,
+		fontSize: PropTypes.number,
+	}
+	// const MemorizedBtn = React.memo(Btn);
 	function App() {
-		const [value, setValue] = React.useState("Save Changes");
-		const changeValue = () => setValue("Revert Changes");
+		/*
+			const [value, setValue] = React.useState("Save Changes");
+			const changeValue = () => setValue("Revert Changes");
+		*/
 		return (
 			<div>
-				<MemorizedBtn text={value} onClick={changeValue} />
-				<MemorizedBtn text="Continue" />
+				<Btn text="Save Changes" fontSize={18} />
+				<Btn text="Continue" />
 			</div>
 		)
 	}
