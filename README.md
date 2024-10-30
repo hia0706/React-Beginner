@@ -10,4 +10,11 @@
 - 좋지 않은 방법과 좋은 방법 2가지
 - 실습 : conversion
 
-### 
+### Props
+- 활용 방법
+- 알아야 할 것
+- React.memo()
+- PropTypes
+
+# React-App
+
