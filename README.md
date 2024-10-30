@@ -15,6 +15,3 @@
 - 알아야 할 것
 - React.memo()
 - PropTypes
-
-# React-App
-
